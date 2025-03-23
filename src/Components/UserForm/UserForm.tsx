@@ -7,14 +7,7 @@ import { UserType } from "../../Types";
 const userSchema = z.object({
     name: z.string().min(3, "The name must contain at least 3 characters."),
     email: z.string().email("Invalid format email"),
-    phone: z
-        .string()
-        .regex(
-            /^[+\d\s().x-]+$/,
-            "The phone number can only contain numbers, '+', '(', ')', '.', 'x', '-', and spaces."
-        )
-        .min(10, "Phone number must be at least 10 characters long")
-        .max(25, "Phone number must not exceed 25 characters"),
+    phone: z.string().optional(),
 });
 
 type UserFormData = z.infer<typeof userSchema> & { id?: number };
