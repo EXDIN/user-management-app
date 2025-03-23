@@ -1,7 +1,13 @@
 import { RouteObject } from "react-router-dom";
 import Pages from "./pages-enum";
 import { Layout } from "../Components";
-import { AddUser, EditUser, Home, Page404, Users } from "../Pages";
+import {
+    AddUserPage,
+    EditUserPage,
+    HomePage,
+    Page404,
+    UsersPage,
+} from "../Pages";
 
 const routes: RouteObject[] = [
     {
@@ -10,22 +16,22 @@ const routes: RouteObject[] = [
         children: [
             {
                 index: true,
-                element: <Home />,
+                element: <HomePage />,
             },
             {
                 path: Pages.Users,
                 children: [
                     {
                         index: true,
-                        element: <Users />,
+                        element: <UsersPage />,
                     },
                     {
                         path: Pages.AddUser,
-                        element: <AddUser />,
+                        element: <AddUserPage />,
                     },
                     {
                         path: Pages.EditUser,
-                        element: <EditUser />,
+                        element: <EditUserPage />,
                     },
                 ],
             },
