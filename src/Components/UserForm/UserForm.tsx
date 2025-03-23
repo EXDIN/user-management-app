@@ -14,7 +14,7 @@ const userSchema = z.object({
             "The phone number can only contain numbers, '+', '(', ')', '.', 'x', '-', and spaces."
         )
         .min(10, "Phone number must be at least 10 characters long")
-        .max(20, "Phone number must not exceed 20 characters"),
+        .max(25, "Phone number must not exceed 25 characters"),
 });
 
 type UserFormData = z.infer<typeof userSchema> & { id?: number };

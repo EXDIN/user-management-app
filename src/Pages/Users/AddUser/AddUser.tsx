@@ -1,15 +1,22 @@
 import Container from "@mui/material/Container";
 import { UserForm } from "../../../Components";
-import { addUser, AppDispatch } from "../../../Store";
-import { useDispatch } from "react-redux";
+import { addUser } from "../../../Store";
 import { UserType } from "../../../Types";
 import { useNavigate } from "react-router-dom";
 import { PagesRouts } from "../../../Routing";
+import { UserApi } from "../../../Services";
+import { useAppDispatch } from "../../../Hooks";
 
 export default function AddUser() {
     const navigate = useNavigate();
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
     const handleSubmit = (data: UserType) => {
+        try {
+            UserApi.addUserFetch(data);
+        } catch (error) {
+            console.log(error);
+        }
+
         dispatch(addUser(data));
         navigate(PagesRouts.Users);
     };

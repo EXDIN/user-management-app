@@ -13,6 +13,18 @@ export default function Header() {
                     <Button
                         color='inherit'
                         component={Link}
+                        to={PagesRouts.Home}
+                        sx={{
+                            "&:hover": {
+                                bgcolor: darken("#123456", 0.2),
+                            },
+                        }}
+                    >
+                        Home
+                    </Button>
+                    <Button
+                        color='inherit'
+                        component={Link}
                         to={PagesRouts.Users}
                         sx={{
                             "&:hover": {

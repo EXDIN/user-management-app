@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { appAxios } from "../../Services";
-import { UserType } from "../../Types";
+import { UserApi } from "../../Services";
 import { AxiosError } from "axios";
 import { initialUsersStateType } from "../slices/UsersSlice";
 
@@ -12,7 +11,7 @@ export const fetchUsersThunk = createAsyncThunk(
     "users/fetchUsers",
     async (_, thunkAPI) => {
         try {
-            const response = await appAxios.get<UserType[]>("");
+            const response = await UserApi.getUserFetch();
             return response.data;
         } catch (error: unknown) {
             const axiosError = error as AxiosError<ErrorResponse>;

@@ -1,15 +1,12 @@
 import Container from "@mui/material/Container";
 import { UserForm } from "../../../Components";
-import {
-    editUser,
-    AppDispatch,
-    selectUserById,
-    AppState,
-} from "../../../Store";
-import { useDispatch, useSelector } from "react-redux";
+import { editUser, selectUserById, AppState } from "../../../Store";
+import { useSelector } from "react-redux";
 import { UserType } from "../../../Types";
 import { useNavigate, useParams } from "react-router-dom";
 import { PagesRouts } from "../../../Routing";
+import { UserApi } from "../../../Services";
+import { useAppDispatch } from "../../../Hooks";
 
 export default function EditUser() {
     const navigate = useNavigate();
@@ -17,8 +14,14 @@ export default function EditUser() {
     const user = useSelector((state: AppState) =>
         selectUserById(state, Number(id))
     );
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
     const handleSubmit = (data: UserType) => {
+        try {
+            UserApi.editUserFetch(data);
+        } catch (error) {
+            console.log(error);
+        }
+
         dispatch(editUser(data));
         navigate(PagesRouts.Users);
     };

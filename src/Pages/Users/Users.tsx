@@ -1,16 +1,13 @@
 import Button from "@mui/material/Button";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import {
-    AppDispatch,
-    deleteUser,
-    fetchUsersThunk,
-    getAllUsers,
-} from "../../Store";
+import { useSelector } from "react-redux";
+import { deleteUser, fetchUsersThunk, getAllUsers } from "../../Store";
 import { useEffect, useState } from "react";
 import { UserType } from "../../Types";
 import { Confirm } from "../../Components";
+import { UserApi } from "../../Services";
+import { useAppDispatch } from "../../Hooks";
 
 export default function Users() {
     const [isDialogOpen, setDialogOpen] = useState(false);
@@ -18,7 +15,7 @@ export default function Users() {
         name: string;
         id: number;
     } | null>(null);
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
     const { users, loaded, status, error } = useSelector(getAllUsers);
 
     useEffect(() => {
@@ -33,6 +30,12 @@ export default function Users() {
     };
 
     const handleConfirm = () => {
+        try {
+            UserApi.deleteUserFetch(Number(selectedUser?.id));
+        } catch (error) {
+            console.log(error);
+        }
+
         dispatch(deleteUser(Number(selectedUser?.id)));
         handleClose();
     };
