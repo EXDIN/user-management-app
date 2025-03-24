@@ -5,12 +5,12 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-interface ConfirmDeleteProps {
+type ConfirmDeleteProps = {
     open: boolean;
     onClose: () => void;
     onConfirm: () => void;
     userName?: string;
-}
+};
 
 function ConfirmDelete({
     open,

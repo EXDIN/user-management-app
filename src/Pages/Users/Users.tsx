@@ -1,13 +1,12 @@
 import Button from "@mui/material/Button";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { deleteUser, fetchUsersThunk, getAllUsers } from "../../Store";
 import { useEffect, useState } from "react";
 import { UserType } from "../../Types";
 import { Confirm } from "../../Components";
 import { UserApi } from "../../Services";
-import { useAppDispatch } from "../../Hooks";
+import { useAppDispatch, useAppSelector } from "../../Hooks";
 
 export default function Users() {
     const [isDialogOpen, setDialogOpen] = useState(false);
@@ -16,7 +15,7 @@ export default function Users() {
         id: number;
     } | null>(null);
     const dispatch = useAppDispatch();
-    const { users, loaded, status, error } = useSelector(getAllUsers);
+    const { users, loaded, status, error } = useAppSelector(getAllUsers);
 
     useEffect(() => {
         if (!loaded) {
@@ -32,12 +31,12 @@ export default function Users() {
     const handleConfirm = () => {
         try {
             UserApi.deleteUserFetch(Number(selectedUser?.id));
+            dispatch(deleteUser(Number(selectedUser?.id)));
         } catch (error) {
             console.log(error);
+        } finally {
+            handleClose();
         }
-
-        dispatch(deleteUser(Number(selectedUser?.id)));
-        handleClose();
     };
 
     const handleClose = () => {
@@ -109,11 +108,11 @@ export default function Users() {
     ];
 
     if (error) {
-        return <div>{error}</div>;
+        return <div>{"Error: " + error}</div>;
     }
 
     if (status === "loading") {
-        return <div>Завантаження користувачів…</div>;
+        return <div>Users Loading...</div>;
     }
 
     return (

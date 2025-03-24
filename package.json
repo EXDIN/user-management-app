@@ -1,14 +1,14 @@
 {
     "name": "user-management",
     "private": true,
-    "version": "0.0.0",
+    "version": "0.0.1",
     "type": "module",
     "scripts": {
         "start": "vite",
+        "test": "vitest",
         "dev": "vite",
         "build": "tsc -b && vite build",
         "lint": "eslint .",
-        "test": "vitest",
         "preview": "vite preview"
     },
     "dependencies": {

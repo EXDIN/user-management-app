@@ -1,30 +1,28 @@
 import Container from "@mui/material/Container";
 import { UserForm } from "../../../Components";
-import { editUser, selectUserById, AppState } from "../../../Store";
-import { useSelector } from "react-redux";
+import { editUser, selectUserById } from "../../../Store";
 import { UserType } from "../../../Types";
 import { useNavigate, useParams } from "react-router-dom";
 import { PagesRouts } from "../../../Routing";
 import { UserApi } from "../../../Services";
-import { useAppDispatch } from "../../../Hooks";
+import { useAppDispatch, useAppSelector } from "../../../Hooks";
 
 export default function EditUser() {
     const navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
-    const user = useSelector((state: AppState) =>
-        selectUserById(state, Number(id))
-    );
+    const user = useAppSelector((state) => selectUserById(state, Number(id)));
     const dispatch = useAppDispatch();
+
     const handleSubmit = (data: UserType) => {
         try {
             UserApi.editUserFetch(data);
+            dispatch(editUser(data));
+            navigate(PagesRouts.Users);
         } catch (error) {
             console.log(error);
         }
-
-        dispatch(editUser(data));
-        navigate(PagesRouts.Users);
     };
+
     return (
         <Container
             maxWidth={false}

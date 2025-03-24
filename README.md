@@ -1,4 +1,6 @@
-# React + TypeScript + Vite
+# User-management-app
+
+Basic functionality with CRUD for the user
 
 ## Libraries
 
@@ -9,11 +11,14 @@
 -   React-hook-forms - work with Forms
 -   ZOD - validator
 -   Axios - for Api
+-   Vitest - testing
 
-## Tests
+## To run project
 
-npm test
+-   git clone https://github.com/EXDIN/user-management-app.git
+-   npm install
 
-## Run App
+## Commands
 
-npm run dev
+-   npm start - Run App
+-   npm test - Run Tests

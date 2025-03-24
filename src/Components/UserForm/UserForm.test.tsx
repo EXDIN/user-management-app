@@ -19,9 +19,9 @@ describe("UserForm component", () => {
     it("renders with initial data", () => {
         const initialData: UserType = {
             id: 1,
-            name: "John Doe",
-            email: "john.doe@example.com",
-            phone: "+1234567890",
+            name: "TEST 1",
+            email: "test@test.com",
+            phone: "123123123",
         };
 
         render(<UserForm initialData={initialData} onSubmit={vi.fn()} />);
@@ -53,22 +53,22 @@ describe("UserForm component", () => {
         render(<UserForm onSubmit={mockOnSubmit} />);
 
         fireEvent.change(screen.getByLabelText(/Name/i), {
-            target: { value: "Jane Doe" },
+            target: { value: "TEST 2" },
         });
         fireEvent.change(screen.getByLabelText(/Email/i), {
-            target: { value: "jane.doe@example.com" },
+            target: { value: "test2@test2.com" },
         });
         fireEvent.change(screen.getByLabelText(/Phone number/i), {
-            target: { value: "+9876543210" },
+            target: { value: "456456456" },
         });
 
         fireEvent.click(screen.getByRole("button", { name: /Add/i }));
 
         await waitFor(() => {
             expect(mockOnSubmit).toHaveBeenCalledWith({
-                name: "Jane Doe",
-                email: "jane.doe@example.com",
-                phone: "+9876543210",
+                name: "TEST 2",
+                email: "test2@test2.com",
+                phone: "456456456",
             });
         });
     });

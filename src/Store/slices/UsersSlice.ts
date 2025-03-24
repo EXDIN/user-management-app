@@ -9,7 +9,7 @@ export type initialUsersStateType = {
     loaded: boolean;
 };
 
-export type addUserType = {
+type addUserType = {
     id: number;
     name: string;
     email: string;

@@ -12,10 +12,10 @@ const userSchema = z.object({
 
 type UserFormData = z.infer<typeof userSchema> & { id?: number };
 
-interface UserFormProps {
+type UserFormProps = {
     initialData?: UserType;
     onSubmit: (data: UserType) => void;
-}
+};
 
 export default function UserForm({ initialData, onSubmit }: UserFormProps) {
     const {

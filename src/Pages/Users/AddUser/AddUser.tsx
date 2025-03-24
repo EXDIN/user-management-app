@@ -10,16 +10,17 @@ import { useAppDispatch } from "../../../Hooks";
 export default function AddUser() {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+
     const handleSubmit = (data: UserType) => {
         try {
             UserApi.addUserFetch(data);
+            dispatch(addUser(data));
+            navigate(PagesRouts.Users);
         } catch (error) {
             console.log(error);
         }
-
-        dispatch(addUser(data));
-        navigate(PagesRouts.Users);
     };
+
     return (
         <Container
             maxWidth={false}

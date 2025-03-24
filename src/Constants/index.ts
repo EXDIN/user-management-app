@@ -1,2 +1,1 @@
-export { undefinedBackgroundImage } from "./Urls";
-export { usersUrl } from "./Urls";
+export { undefinedBackgroundImage, usersUrl } from "./Urls";
